@@ -1,3 +1,5 @@
+import command from './js/command';
+
 const Terminal = () => {
 	const terminal = document.querySelector('.terminal');
 	let prompt = terminal.querySelector('.prompt');
@@ -9,7 +11,7 @@ const Terminal = () => {
 		const newPrompt = prompt.cloneNode(true);
 		input.nextElementSibling.remove();
 		if (prompt) {
-			newPrompt.querySelector('.input').textContent = prompt;
+			newPrompt.querySelector('.input').innerHTML = prompt;
 		}
 		prompt = newPrompt;
 		currentString = ``;
@@ -19,13 +21,20 @@ const Terminal = () => {
 	};
 
 	const addToHistory = () => {
-		history.push(input.textContent);
+		history.push(input.innerHTML);
+
+		if (input.innerHTML === 'dir') {
+			const meep = command('dir');
+			console.log(meep);
+			input.innerHTML = meep;
+		}
+
 		resetPrompt();
 	};
 
 	const addCharacter = (key) => {
+		if (currentString.length > 69) return;
 		currentString += key;
-		console.log(currentString);
 		input.innerHTML = currentString;
 	};
 
