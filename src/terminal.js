@@ -1,0 +1,3 @@
+const terminal = () => {
+  const history = [];
+};
