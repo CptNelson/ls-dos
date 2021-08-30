@@ -20,13 +20,19 @@ const Terminal = () => {
 		newPrompt.querySelector('.input').innerHTML = currentString;
 	};
 
+	const createDiv = (cmdReturn) => {
+		const answer = document.createElement("div");
+		answer.innerHTML = cmdReturn;
+		terminal.appendChild(answer);
+	}
+
 	const addToHistory = () => {
 		history.push(input.innerHTML);
 
 		if (input.innerHTML === 'dir') {
 			const meep = command('dir');
-			console.log(meep);
-			input.innerHTML = meep;
+			console.log("asd "+ meep);
+			createDiv(meep);
 		}
 
 		resetPrompt();
