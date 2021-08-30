@@ -12,9 +12,10 @@ const Terminal = () => {
 			newPrompt.querySelector('.input').textContent = prompt;
 		}
 		prompt = newPrompt;
+		currentString = ``;
 		input = prompt.querySelector('.input');
 		terminal.appendChild(prompt);
-		newPrompt.querySelector('.input').innerHTML = ' ';
+		newPrompt.querySelector('.input').innerHTML = currentString;
 	};
 
 	const addToHistory = () => {
@@ -24,14 +25,13 @@ const Terminal = () => {
 
 	const addCharacter = (key) => {
 		currentString += key;
+		console.log(currentString);
 		input.innerHTML = currentString;
 	};
 
 	const removeCharacter = () => {
-		input.textContent = input.textContent.substring(
-			0,
-			input.innerHTML.length - 1
-		);
+		currentString = currentString.slice(0, -1);
+		input.innerHTML = currentString;
 	};
 
 	document.addEventListener('keydown', (event) => {
@@ -40,7 +40,7 @@ const Terminal = () => {
 			return;
 		}
 		if (event.key === ' ') {
-			addCharacter('&nbsp');
+			addCharacter('\u00A0');
 			event.preventDefault();
 			return false;
 		}
